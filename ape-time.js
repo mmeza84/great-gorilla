@@ -219,8 +219,8 @@ function decideItems(){
     //determine if an item occurs.
     //returns an array(2) of booleans: coinGet, bananaGet.
     var randomSeed = Math.random().toFixed(2);
-    var coinChance = 1.0; //chance occurs each round
-    var bananaChance = 1.0; //chance occurs on the first round & last round
+    var coinChance = 0.3; //chance occurs each round
+    var bananaChance = 0.5; //chance occurs on the first round & last round
     //is it the first or last round?
     var firstRound = false;
     var lastRound = false;
