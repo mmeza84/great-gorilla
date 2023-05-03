@@ -219,7 +219,7 @@ function decideItems(){
     //determine if an item occurs.
     //returns an array(2) of booleans: coinGet, bananaGet.
     var randomSeed = Math.random().toFixed(2);
-    var coinChance = 0.33; //chance occurs each round
+    var coinChance = 0.3; //chance occurs each round
     var bananaChance = 0.5; //chance occurs on the first round & last round
     //is it the first or last round?
     var firstRound = false;
@@ -303,16 +303,26 @@ function distributeItems(decideItemsIn){
         }
     }while(winnerFound == false);
 
-    if(decideItemsIn[0]==true){
+    if(decideItemsIn[0]==true && decideItemsIn[1]==false){
         //coin get
         contestants[winnerIndex].silverCoins += 1;
         silverCoinAnim();
-    }else if(decideItemsIn[1]==true){
+    }else if(decideItemsIn[1]==true && decideItemsIn[0]==false){
         //banana get
         contestants[winnerIndex].goldBananas += 1;
         goldBananaAnim();
+    }else if(decideItemsIn[0] == true && decideItemsIn[1] == true){
+        //both
+        //coin get
+        contestants[winnerIndex].silverCoins += 1;
+        silverCoinAnim();
+        //banana get
+        window.setTimeout(()=>{
+            contestants[winnerIndex].goldBananas += 1;
+        goldBananaAnim();
+        },1000);
     }else{
-        //no item
+
     }
 }
 
@@ -330,14 +340,15 @@ function silverCoinAnim(){
 }
 
 function goldBananaAnim(){
+    console.log('banana descending');
     //create a div
-    var sc = document.createElement('div');
+    var bc = document.createElement('div');
     //set id to gold-banana
-    sc.id="gold-banana";
+    bc.id="gold-banana";
     //set class to gold-banana-anim
-    sc.classList.add('gold-banana-anim');
+    bc.classList.add('gold-banana-anim');
     //append
-    document.body.appendChild(sc);
+    document.body.appendChild(bc);
 
     //TODO: AUDIO
 }
