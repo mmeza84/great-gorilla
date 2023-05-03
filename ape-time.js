@@ -247,9 +247,9 @@ function decideItems(){
 
     //determine banana
     if(lastRound == true || firstRound == true){
-        console.log('first round or last round');
+        //console.log('first round or last round');
         if(randomSeed < bananaChance){
-            console.log('banana activated');
+            //console.log('banana activated');
             results[1] = true;
         }
     }
@@ -340,7 +340,7 @@ function silverCoinAnim(){
 }
 
 function goldBananaAnim(){
-    console.log('banana descending');
+    //console.log('banana descending');
     //create a div
     var bc = document.createElement('div');
     //set id to gold-banana
@@ -362,7 +362,7 @@ function decideWinner(){
     do{
         var randomContestantIndex = Math.floor(Math.random()*contestants.length);
         var randomContestant = contestants[randomContestantIndex];
-        console.log(randomContestant);
+        //console.log(randomContestant);
         if(randomContestant.hasGone==false){
             winner = randomContestant.name;
             //set contestant's hasGone property to true
