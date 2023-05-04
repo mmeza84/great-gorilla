@@ -430,6 +430,31 @@ body{
     animation-timing-function:ease-in-out;
 }
 
+.original-sketch{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:1920px;
+    height:1080px;
+    background-image:url('img/original-sketch.png');
+    animation-fill-mode:forwards;
+    z-index:999;
+}
+
+.fade-out{
+    animation-name:fade-out;
+    animation-duration:2000ms;
+}
+
+@keyframes fade-out{
+    0%{
+        opacity:100%;
+    }
+    100%{
+        opacity:0%;
+    }
+}
+
 @keyframes silver-coin-kf{
     0%{
         transform: translateY(0px) rotate3d(0,0,0,0deg) scale(1.0);

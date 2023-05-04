@@ -719,6 +719,20 @@ function buildItemTable(){
     targetDiv.appendChild(tbl);
 }
 
+function showOriginalSketch(){
+    var osk = document.createElement('div');
+    osk.id='original-sketch';
+    osk.classList.add('original-sketch');
+    document.body.appendChild(osk);
+}
+
+function hideOriginalSketch(){
+    document.getElementById('original-sketch').classList.add('fade-out');
+    window.setTimeout(()=>{
+        document.getElementById('original-sketch').remove();
+    },2100);
+}
+
 //end program
 
 /**
