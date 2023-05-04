@@ -347,7 +347,7 @@ function decideItems(){
 
     //determine banana
     if(lastRound == true || firstRound == true){
-        //console.log('first round or last round');
+        console.log('first round or last round');
         if(randomSeed < bananaChance){
             //console.log('banana activated');
             results[1] = true;
