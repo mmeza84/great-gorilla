@@ -458,7 +458,10 @@ function setSessionBegin(){
             }
         }
         if(allGone == true){
-            contestants = contestantsInitial;
+            //contestants = contestantsInitial;
+            for(var i = 0; i < contestants.length; i++){
+                contestants[i].hasGone = false;
+            }
         }
     }
 }
