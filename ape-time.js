@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     // static variable for localStorage key
     // probably won't ever change but if it does,
     // you only have to do it once.
-    var CONTESTANTS = "contestants";
+    
 
     //set the tagline
     document.getElementById('tagline').innerHTML=chooseTagline();
@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('consult-text').addEventListener('click',()=>{
         //add animation class to log
         document.getElementById('button').classList.add('log-ascend');
+        //sound effect
+        playSound(soundEffects.regular.logPull);
 
         //close curtain after the thing ascends
         window.setTimeout(()=>{
@@ -60,6 +62,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     //spotlights on, chase sequence 1 on.
                     spotlightsOn();
 
+                    //begin drum roll
+                    playSound(soundEffects.regular.drumRoll);
+
                     //while theyre going, decide the winner
                     document.getElementById('consult-text').innerHTML=decideWinner();
                     document.getElementById('consult-text').classList.add('winner-text');
@@ -76,6 +81,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         window.setTimeout(()=>{
                             //spotlights center
                             centerSpotlights();
+
+                            //play drum stab
+                            playSound(soundEffects.regular.drumStab);
 
                             //clear marquee interval
                             window.clearInterval(chaserInterval);
@@ -111,6 +119,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 /**
  * GLOBALS
  */
+
+const CONTESTANTS = "contestants";
 
 const contestantsInitial = [
     {
@@ -294,6 +304,17 @@ let soundEffects = {
     return taglines[Math.floor(Math.random()*taglines.length)];
 }
 
+function playSound(soundObject){
+    var a = document.createElement('audio');
+    a.src=soundObject.location;
+    a.id=soundObject.name;
+    document.body.appendChild(a);
+    a.play();
+    window.setTimeout(()=>{
+        a.remove();
+    },parseInt(soundObject.duration));
+}
+
 function decideItems(){
     //determine if an item occurs.
     //returns an array(2) of booleans: coinGet, bananaGet.
@@ -346,13 +367,45 @@ function deductItem(playerName,itemType){
             playerIndex = i;
         }
     }
-    contestants[playerIndex][itemType] -= 1;
+    // contestants[playerIndex][itemType] -= 1;
     
     //TODO: AUDIO
-    if(itemType=='silverCoins'){
+    if(itemType=='silverCoin'){
         //play silver coin use sfx
-    }else if(itemType=='goldBananas'){
+        playSound(soundEffects.regular.coinUse);
+        contestants[playerIndex].silverCoins -= 1;
+    }else if(itemType=='goldBanana'){
         //play gold banana use sfx
+        playSound(soundEffects.regular.goldBananaUse);
+        contestants[playerIndex].goldBananas -= 1;
+    }
+
+    buildItemTable(); //refresh table
+    setSessionEnd(); //save state
+}
+
+function addItem(playerName,itemType){
+    //playerName: 'Jeff'
+    //itemType: 'silverCoins' || 'goldBananas'
+    var playerIndex;
+    for(var i = 0; i < contestants.length; i++){
+        if(contestants[i].name==playerName){
+            playerIndex = i;
+        }
+    }
+    // contestants[playerIndex][itemType] -= 1;
+    
+    //TODO: AUDIO
+    if(itemType=='silverCoin'){
+        silverCoinAnim();
+        //play silver coin use sfx
+        playSound(soundEffects.regular.coinGet);
+        contestants[playerIndex].silverCoins += 1;
+    }else if(itemType=='goldBanana'){
+        goldBananaAnim();
+        //play gold banana use sfx
+        playSound(soundEffects.regular.goldBananaUse);
+        contestants[playerIndex].goldBananas += 1;
     }
 
     buildItemTable(); //refresh table
@@ -416,6 +469,8 @@ function silverCoinAnim(){
     document.body.appendChild(sc);
 
     //TODO: AUDIO
+    //play sound
+    playSound(soundEffects.regular.coinGet);
 }
 
 function goldBananaAnim(){
@@ -430,6 +485,8 @@ function goldBananaAnim(){
     document.body.appendChild(bc);
 
     //TODO: AUDIO
+    //play the music
+    playSound(soundEffects.regular.goldBananaGet);
 }
 
 function decideWinner(){
@@ -524,13 +581,17 @@ function descendLog(){
  */
 function setSessionBegin(){
   // check for existing contestants data
-  // if data exists, load to current session.
-  contestants = JSON.parse(localStorage.getItem(CONTESTANTS));
   
   // if it doesn't, load initial.
-  if (!contestants) {
+  if (JSON.parse(localStorage.getItem(CONTESTANTS))==null) {
     contestants = contestantsInitial;
+    console.log('contestants undefined, set to initial.');
+  }else{
+      // if data exists, load to current session.
+      contestants = JSON.parse(localStorage.getItem(CONTESTANTS));
   }
+
+  
   
   // if all have gone, reset all hasGone's.
   if (!contestants.find(c => !c.hasGone)) {
