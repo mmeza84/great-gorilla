@@ -398,13 +398,9 @@ function addItem(playerName,itemType){
     //TODO: AUDIO
     if(itemType=='silverCoin'){
         silverCoinAnim();
-        //play silver coin use sfx
-        playSound(soundEffects.regular.coinGet);
         contestants[playerIndex].silverCoins += 1;
     }else if(itemType=='goldBanana'){
         goldBananaAnim();
-        //play gold banana use sfx
-        playSound(soundEffects.regular.goldBananaUse);
         contestants[playerIndex].goldBananas += 1;
     }
 
