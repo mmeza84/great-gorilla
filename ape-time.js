@@ -213,6 +213,80 @@ let taglines = [
 ];
 
 /**
+ * Sound Effects
+ * name: used for div id
+ * location: relative location in document space
+ * duration: time in milliseconds.  useful for setting timeouts to remove audio object
+ * tah-dahs are stored as an array because these sounds are randomly selected
+ */
+let soundEffects = {
+    tahDahs:[
+        {
+            //ta-da 1
+            name:"ta-dah-1",
+            location:"aud/tah-dah-1.mp3",
+            duration:"1533",
+        },
+        {
+            //ta-da 2
+            name:"ta-dah-2",
+            location:"aud/tah-dah-2",
+            duration:"2298",
+        },
+        {
+            //ta-da 3
+            name:"ta-dah-3",
+            location:"aud/tah-dah-3",
+            duration:"1807",
+        },
+    ],
+    regular:{
+        logPull:{
+            //log pull
+            name:"log-pull",
+            location:"aud/log-pull.mp3",
+            duration:"1552",
+        },
+        coinGet:{
+            //coin get
+            name:"coin-get",
+            location:"aud/coin-get.mp3",
+            duration:"3034",
+        },
+        coinUse:{
+            //coin use
+            name:"coin-use",
+            location:"aud/coin-use.mp3",
+            duration:"3024",
+        },
+        drumRoll:{
+            //drum roll
+            name:"drum-roll",
+            location:"aud/drum-roll.mp3",
+            duration:"4979",
+        },
+        drumStab:{
+            //drum stab
+            name:"drum-roll-end-stab",
+            location:"aud/drum-roll-end-stab.mp3",
+            duration:"1199",
+        },
+        goldBananaGet:{
+            //gold banana get
+            name:"gold-banana-get",
+            location:"aud/gold-banana-get.mp3",
+            duration:"13769",
+        },
+        goldBananaUse:{
+            //gold banana use
+            name:"gold-banana-use",
+            location:"aud/gold-banana-use.mp3",
+            duration:"1572",
+        },
+    },
+}
+
+/**
  * FUNCTIONS
  */
 
