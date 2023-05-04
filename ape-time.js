@@ -223,19 +223,19 @@ let soundEffects = {
     tahDahs:[
         {
             //ta-da 1
-            name:"ta-dah-1",
+            name:"tah-dah-1",
             location:"aud/tah-dah-1.mp3",
             duration:"1533",
         },
         {
             //ta-da 2
-            name:"ta-dah-2",
+            name:"tah-dah-2",
             location:"aud/tah-dah-2",
             duration:"2298",
         },
         {
             //ta-da 3
-            name:"ta-dah-3",
+            name:"tah-dah-3",
             location:"aud/tah-dah-3",
             duration:"1807",
         },
