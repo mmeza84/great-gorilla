@@ -8,6 +8,11 @@
  * RUNTIME
  */
 document.addEventListener('DOMContentLoaded', ()=>{
+    // static variable for localStorage key
+    // probably won't ever change but if it does,
+    // you only have to do it once.
+    var CONTESTANTS = "contestants";
+
     //set the tagline
     document.getElementById('tagline').innerHTML=chooseTagline();
     //set the session
@@ -444,33 +449,26 @@ function descendLog(){
  * Set Session From Local Storage
  */
 function setSessionBegin(){
-    //check for existing contestants data
-    if(localStorage.getItem("contestants")==null){
-        localStorage.setItem("contestants",JSON.stringify(contestantsInitial));
-    }else{
-        //if data exists, load to current session.
-        contestants = JSON.parse(localStorage.getItem("contestants"));
-        //if all have gone, load initial.
-        var allGone = true;
-        for(var i = 0; i < contestants.length; i++){
-            if(contestants[i].hasGone == false){
-                allGone = false;
-            }
-        }
-        if(allGone == true){
-            //contestants = contestantsInitial;
-            for(var i = 0; i < contestants.length; i++){
-                contestants[i].hasGone = false;
-            }
-        }
-    }
+  // check for existing contestants data
+  // if data exists, load to current session.
+  contestants = JSON.parse(localStorage.getItem(CONTESTANTS));
+  
+  // if it doesn't, load initial.
+  if (!contestants) {
+    contestants = contestantsInitial;
+  }
+  
+  // if all have gone, reset all hasGone's.
+  if (!contestants.find(c => !c.hasGone)) {
+    contestants.forEach(c => c.hasGone = false);
+  }
 }
 
 /**
  * Set session at end.
  */
 function setSessionEnd(){
-    localStorage.setItem("contestants",JSON.stringify(contestants));
+    localStorage.setItem(CONTESTANTS, JSON.stringify(contestants));
 }
 
 /**
@@ -529,14 +527,15 @@ function marqueeChase(startingPoint){
 }
 
 function populateContestantDiv(){
-    var output = "";
-    for(var i = 0; i < contestants.length; i++){
-        if(contestants[i].hasGone == false){
-            output += "" +
-            contestants[i].name +
-            "<br>";
-        }
-    }
+    // take all contestants
+    // filter to just ones that haven't gone yet
+    // map over and return just names
+    // and then join everyone left with a line break.
+    var output = contestants
+        .filter(c => !c.hasGone)
+        .map(c => c.name)
+        .join("<br>");
+
     document.getElementById('contestants-list').innerHTML = output;
 }
 
