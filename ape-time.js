@@ -2,6 +2,7 @@
  * APE TIME
  * a.k.a. idonate engineering joke lottery v2
  * Created by bguthrie@idonate.com
+ * Special thanks to mmeza@idonate.com
  */
 
 /**
