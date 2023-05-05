@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                             //play tah-dah
                             window.setTimeout(()=>{
-                                var randomTahDahIndex = Math.round(Math.random()*soundEffects.tahDahs.length);
+                                var randomTahDahIndex = Math.floor(Math.random()*soundEffects.tahDahs.length);
                                 playSound(soundEffects.tahDahs[randomTahDahIndex]);
                             },tahDahDelay);
 
@@ -500,7 +500,7 @@ function decideWinner(){
     var debug = 0;
     
     do{
-        var randomContestantIndex = Math.round(Math.random()*contestants.length);
+        var randomContestantIndex = Math.floor(Math.random()*contestants.length);
         var randomContestant = contestants[randomContestantIndex];
         //console.log(randomContestant);
         if(randomContestant.hasGone==false){
