@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var itemDelay = 250;
     var itemRebuildDelay = 250;
     var defaultMarqueeInterval = 350;
+    var tahDahDelay = 1680;
 
     //when the consult text is clicked:
     document.getElementById('consult-text').addEventListener('click',()=>{
@@ -84,6 +85,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                             //play drum stab
                             playSound(soundEffects.regular.drumStab);
+
+                            //play tah-dah
+                            window.setTimeout(()=>{
+                                var randomTahDahIndex = Math.round(Math.random()*soundEffects.tahDahs.length);
+                                playSound(soundEffects.tahDahs[randomTahDahIndex]);
+                            },tahDahDelay);
 
                             //clear marquee interval
                             window.clearInterval(chaserInterval);
@@ -492,7 +499,7 @@ function decideWinner(){
     var debug = 0;
     
     do{
-        var randomContestantIndex = Math.floor(Math.random()*contestants.length);
+        var randomContestantIndex = Math.round(Math.random()*contestants.length);
         var randomContestant = contestants[randomContestantIndex];
         //console.log(randomContestant);
         if(randomContestant.hasGone==false){
