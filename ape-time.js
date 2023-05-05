@@ -247,13 +247,13 @@ let soundEffects = {
         {
             //ta-da 2
             name:"tah-dah-2",
-            location:"aud/tah-dah-2",
+            location:"aud/tah-dah-2.mp3",
             duration:"2298",
         },
         {
             //ta-da 3
             name:"tah-dah-3",
-            location:"aud/tah-dah-3",
+            location:"aud/tah-dah-3.mp3",
             duration:"1807",
         },
     ],
